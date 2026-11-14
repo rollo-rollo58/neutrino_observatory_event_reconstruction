@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #07121b;
+  background-image: radial-gradient(
+    circle at 17% 7%, rgba(43, 115, 133, 0.16), transparent 34%
+  );
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #4de0c1;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #06131d;
+  background: #65e9d2;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #294756;
+  border-radius: 20px;
+}
+
+@layer components {
+  .instrument-card {
+    @apply rounded-2xl border border-white/10 bg-panel/80 p-5;
+  }
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.23em] text-muted;
+  }
+  .metric-number {
+    @apply text-2xl font-semibold tracking-tight text-white;
+  }
+  .action-button {
+    @apply rounded-xl bg-sea px-4 py-2 text-sm font-bold text-abyss;
+    @apply transition-transform hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .secondary-button {
+    @apply rounded-xl border border-white/15 px-3 py-2 text-sm text-slate-200;
+    @apply transition-colors hover:border-sea/50 hover:bg-sea/10;
+  }
+}

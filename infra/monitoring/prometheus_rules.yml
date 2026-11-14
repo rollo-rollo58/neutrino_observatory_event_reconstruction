@@ -1,0 +1,24 @@
+groups:
+  - name: borealis-research-availability
+    interval: 30s
+    rules:
+      - alert: ResearchApiDown
+        expr: up{job="borealis-api"} == 0
+        for: 3m
+        labels:
+          severity: warning
+          service: borealis-research
+        annotations:
+          summary: "Borealis research API is unreachable"
+          description: "This monitors a demo deployment only, not live detector operations."
+      - alert: ResearchApiErrorRatioHigh
+        expr: |
+          sum(rate(http_requests_total{job="borealis-api",status=~"5.."}[5m]))
+          /
+          clamp_min(sum(rate(http_requests_total{job="borealis-api"}[5m])), 1)
+          > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High research API 5xx fraction"
